@@ -1,4 +1,4 @@
-import { db as prisma } from '../lib/db.js'
+import { prisma } from '../lib/db.js'
 
 type Segredo = {
   id?: string
