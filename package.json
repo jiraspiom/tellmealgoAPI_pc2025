@@ -1,8 +1,9 @@
 {
-  "name": "tellmealgoAPI_pc2025",
+  "name": "tellmealgoapi_pc2025",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "vercel-build": "npx prisma generate"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
