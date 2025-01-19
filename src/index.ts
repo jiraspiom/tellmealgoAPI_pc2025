@@ -1,6 +1,9 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import SegredoController from './controllers/SegredoController.js'
+import SegredosRepository from './repository/SegredosRepository.js'
+import CataasService from './services/CataasService.js'
 
 const app = new Hono()
 
@@ -16,9 +19,22 @@ app.use(
   })
 )
 
+const cataasService = new CataasService('https://cataas.com/cat?json=true')
+const segredosRepository = new SegredosRepository()
+const segredoController = new SegredoController(
+  cataasService,
+  segredosRepository
+)
+
 app.get('/', c => {
   return c.text('Hello Hono!')
 })
+
+app.get('/segredos', ctx => segredoController.getSegredos(ctx))
+
+app.get('/segredos/:id', async ctx => segredoController.getSegredoById(ctx))
+
+app.post('/segredos', ctx => segredoController.createSegredo(ctx))
 
 const port = 3000
 console.log(`Server is running on http://localhost:${port}`)
