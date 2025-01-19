@@ -5,7 +5,7 @@ import SegredoController from './controllers/SegredoController.js'
 import SegredosRepository from './repository/SegredosRepository.js'
 import CataasService from './services/CataasService.js'
 
-const app = new Hono()
+const app = new Hono().basePath('/api')
 
 app.use(
   '*',
@@ -36,7 +36,7 @@ app.get('/segredos/:id', async ctx => segredoController.getSegredoById(ctx))
 
 app.post('/segredos', ctx => segredoController.createSegredo(ctx))
 
-const port = 3000
+const port = 3333
 console.log(`Server is running on http://localhost:${port}`)
 
 serve({
