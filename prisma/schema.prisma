@@ -15,7 +15,7 @@ datasource db {
 
 model segredos {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  segredo  String
+  segredo  String?
   cor      String?
   coracao  Int?
   urlImage String?

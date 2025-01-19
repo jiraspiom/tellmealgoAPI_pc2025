@@ -34,6 +34,8 @@ app.get('/segredos', ctx => segredoController.getSegredos(ctx))
 
 app.get('/segredos/:id', async ctx => segredoController.getSegredoById(ctx))
 
+app.put('/segredos/like', async ctx => segredoController.likeSegredoById(ctx))
+
 app.post('/segredos', ctx => segredoController.createSegredo(ctx))
 
 const port = 3333

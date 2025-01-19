@@ -8,6 +8,9 @@ type Segredo = {
   coracao?: number
   urlImage?: string
 }
+type Like = {
+  id: string
+}
 
 class SegredoController {
   private readonly cataasService: CataasService
@@ -25,7 +28,9 @@ class SegredoController {
 
   async getSegredoById(ctx: Context) {
     const { id } = ctx.req.param() // Usando params da URL
+
     const dados = await this.repository.getSegredoById(id)
+
     if (!dados) {
       return ctx.json({ error: 'Segredo não encontrado' }, 404)
     }
@@ -47,6 +52,18 @@ class SegredoController {
     } catch (error) {
       return ctx.json({ error: 'erro' }, 500)
     }
+  }
+
+  async likeSegredoById(ctx: Context) {
+    const corpo = await ctx.req.json<Like>() // Usando params da URL
+    console.log('corpo', corpo)
+
+    const dados = await this.repository.createLike(corpo.id)
+
+    if (!dados) {
+      return ctx.json({ error: 'Segredo não encontrado' }, 404)
+    }
+    return ctx.json({ data: dados })
   }
 
   async createSegredoteste(ctx: Context) {
