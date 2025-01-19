@@ -10,7 +10,7 @@ const app = new Hono().basePath('/api')
 app.use(
   '*',
   cors({
-    origin: 'http://localhost:3000',
+    origin: [String(process.env.ORIGIN_PROD), String(process.env.ORIGIN_DEV)],
     allowHeaders: ['Content-Type', 'Authorization'],
     allowMethods: ['POST', 'OPTIONS'],
     exposeHeaders: ['Content-Length'],
